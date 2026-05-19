@@ -1,0 +1,407 @@
+.menuPage {
+  padding: 5rem 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  margin-top: 2rem;
+}
+
+.header h1 {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Search and Filter Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.searchBar {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3rem;
+  border-radius: 50px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  transition: var(--transition-smooth);
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px var(--accent-gold-glow);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+/* Category Tabs */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tabBtn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.tabBtn:hover {
+  border-color: var(--accent-gold);
+  color: var(--text-primary);
+}
+
+.activeTabBtn {
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  border-color: var(--accent-gold);
+}
+
+/* Grid Layout */
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.menuItemCard {
+  display: flex;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  height: 180px;
+}
+
+.menuItemCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-gold-border);
+  box-shadow: var(--card-shadow);
+}
+
+.itemImage {
+  width: 180px;
+  position: relative;
+  background: var(--bg-tertiary);
+  flex-shrink: 0;
+}
+
+.itemContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.itemName {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.itemPrice {
+  color: var(--accent-gold);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.itemDescription {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.itemFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.itemTags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tagVegan {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.tagGluten {
+  background: rgba(224, 122, 95, 0.1);
+  color: var(--accent-coral);
+  border: 1px solid rgba(224, 122, 95, 0.2);
+}
+
+.pairBtn {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold-border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pairBtn:hover {
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+}
+
+/* Modal / Drawer for Smart Pairing */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modalOverlayActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalContent {
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 550px;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: var(--card-shadow);
+  transform: translateY(30px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modalOverlayActive .modalContent {
+  transform: translateY(0);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.closeBtn:hover {
+  color: var(--accent-gold);
+}
+
+.pairingHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pairingHeader h2 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+}
+
+.pairingHeader p {
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.5rem;
+}
+
+.pairingBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.selectedDishInfo {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.selectedDishInfo h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.selectedDishInfo p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.recommendationCard {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.beverageIcon {
+  font-size: 3rem;
+  color: var(--accent-gold);
+  background: var(--bg-primary);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--accent-gold-border);
+}
+
+.beverageDetails h4 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.beverageDetails p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.pairingPriceInfo {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.modalActions button {
+  flex: 1;
+}
+
+/* Toast styling for notifications */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent-success);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  z-index: 3000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  font-weight: 600;
+  animation: fadeInUp 0.3s ease;
+}
+
+@media (max-width: 992px) {
+  .menuGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .menuItemCard {
+    flex-direction: column;
+    height: auto;
+  }
+  .itemImage {
+    width: 100%;
+    height: 150px;
+  }
+  .modalContent {
+    padding: 1.5rem;
+  }
+  .recommendationCard {
+    flex-direction: column;
+    text-align: center;
+  }
+  .modalActions {
+    flex-direction: column;
+  }
+}

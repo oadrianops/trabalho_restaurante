@@ -1,0 +1,144 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10, 11, 14, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: var(--transition-smooth);
+}
+
+.headerScrolled {
+  background: rgba(6, 7, 9, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.logoGold {
+  color: var(--accent-gold);
+}
+
+.navLinks {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.navLink {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 0.5rem 0;
+  transition: var(--transition-smooth);
+  letter-spacing: 0.5px;
+}
+
+.navLink:hover {
+  color: var(--accent-gold);
+}
+
+.activeLink {
+  color: var(--accent-gold);
+}
+
+.activeLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-gold);
+  border-radius: 2px;
+}
+
+.reserveBtn {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold-border);
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.reserveBtn:hover {
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+  box-shadow: 0 0 15px var(--accent-gold-glow);
+  transform: translateY(-2px);
+}
+
+/* Mobile styles */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: var(--bg-secondary);
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: var(--transition-smooth);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .navLinksActive {
+    transform: translateX(0);
+  }
+
+  .navLink {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .reserveBtn {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+}
