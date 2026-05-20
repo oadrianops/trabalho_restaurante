@@ -44,7 +44,7 @@ const MENU_ITEMS = [
     preco: 52.00,
     categoria: 'entradas',
     descricao: 'Fatias de pão italiano tostadas no azeite de ervas, cobertas com presunto de Parma premium, figos grelhados, queijo de cabra cremoso e mel trufado.',
-    imagem: '/images/dish_burrata.png',
+    imagem: '/images/dish_bruschetta.png',
     tags: [],
     harmonizacao: {
       bebida: 'Espumante Brut Chardonnay',
@@ -93,7 +93,7 @@ const MENU_ITEMS = [
     preco: 110.00,
     categoria: 'principais',
     descricao: 'Posta de salmão grelhada com crosta de gergelim, molho suave de maracujá fresco, acompanhada de legumes da estação grelhados no azeite de oliva extra virgem.',
-    imagem: '/images/dish_tenderloin.png',
+    imagem: '/images/dish_salmon.png',
     tags: ['sem glúten'],
     harmonizacao: {
       bebida: 'Chardonnay Amadeirado',
@@ -109,7 +109,7 @@ const MENU_ITEMS = [
     preco: 88.00,
     categoria: 'principais',
     descricao: 'Nhoque artesanal de mandioquinha salteado na manteiga de sálvia, servido com ragu de carne seca desfiada cozida lentamente e finalizado com queijo coalho gratinado.',
-    imagem: '/images/dish_risoto.png',
+    imagem: '/images/dish_nhoque.png',
     tags: [],
     harmonizacao: {
       bebida: 'Cerveja IPA Artesanal',
@@ -142,7 +142,7 @@ const MENU_ITEMS = [
     preco: 38.00,
     categoria: 'sobremesas',
     descricao: 'Clássico creme de gemas e creme de leite fresco aromatizado com fava de baunilha Bourbon, coberto com uma casquinha crocante de açúcar caramelizado no maçarico.',
-    imagem: '/images/dish_dessert.png',
+    imagem: '/images/dish_creme_brulee.png',
     tags: ['vegetariano', 'sem glúten'],
     harmonizacao: {
       bebida: 'Colheita Tardia (Late Harvest)',
@@ -158,7 +158,7 @@ const MENU_ITEMS = [
     preco: 30.00,
     categoria: 'sobremesas',
     descricao: 'Pudim ultra cremoso de Leite Ninho com textura aveludada sem furinhos, regado com uma generosa calda de caramelo dourada perfeita.',
-    imagem: '/images/dish_dessert.png',
+    imagem: '/images/dish_pudim.png',
     tags: ['vegetariano', 'sem glúten'],
     harmonizacao: {
       bebida: 'Espresso Gourmet',
@@ -175,7 +175,7 @@ const MENU_ITEMS = [
     preco: 35.00,
     categoria: 'bebidas',
     descricao: 'Taça de vinho tinto seco encorpado, aromático e de taninos marcantes.',
-    imagem: '/images/hero.png',
+    imagem: '/images/drink_wine.png',
     tags: ['vegano', 'sem glúten'],
     harmonizacao: null
   },
@@ -185,7 +185,7 @@ const MENU_ITEMS = [
     preco: 32.00,
     categoria: 'bebidas',
     descricao: 'Taça de vinho branco frutado, refrescante com notas amanteigadas.',
-    imagem: '/images/hero.png',
+    imagem: '/images/drink_wine_white.png',
     tags: ['vegano', 'sem glúten'],
     harmonizacao: null
   },
@@ -195,7 +195,7 @@ const MENU_ITEMS = [
     preco: 38.00,
     categoria: 'bebidas',
     descricao: 'Gin premium importado, água tônica artesanal, fatias de pepino, zimbro e um toque de alecrim fresco.',
-    imagem: '/images/hero.png',
+    imagem: '/images/drink_gin.png',
     tags: ['vegano', 'sem glúten'],
     harmonizacao: null
   },
@@ -205,7 +205,7 @@ const MENU_ITEMS = [
     preco: 22.00,
     categoria: 'bebidas',
     descricao: 'Cerveja artesanal local de estilo India Pale Ale, aromática e encorpada.',
-    imagem: '/images/hero.png',
+    imagem: '/images/drink_beer.png',
     tags: ['vegano'],
     harmonizacao: null
   },
@@ -215,7 +215,7 @@ const MENU_ITEMS = [
     preco: 18.00,
     categoria: 'bebidas',
     descricao: 'Água mineral gaseificada naturalmente, importada diretamente da Itália (750ml).',
-    imagem: '/images/hero.png',
+    imagem: '/images/drink_water.png',
     tags: ['vegano', 'sem glúten'],
     harmonizacao: null
   }
