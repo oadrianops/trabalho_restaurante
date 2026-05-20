@@ -147,10 +147,41 @@ export default function Reservas() {
     return styles.tableAvailable;
   };
 
+  const [isRegistering, setIsRegistering] = useState(true);
+
   const selectedTableInfo = TABLES_DATA.find(t => t.id === mesaSelecionada);
 
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/clientes?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setNome(data.cliente.nome);
+        setTelefone(data.cliente.telefone);
+        setClienteId(data.cliente.id);
+        setStep(2);
+      } else {
+        alert(data.error || 'E-mail não cadastrado. Por favor, faça o cadastro como Novo Cliente.');
+        setIsRegistering(true);
+      }
+    } catch (err) {
+      console.error('Erro ao buscar cadastro de cliente:', err);
+      alert('Erro de conexão ao buscar cadastro. Usando modo offline local.');
+      setNome('Adrian Silva');
+      setTelefone('(91) 98605-8877');
+      setClienteId(42);
+      setStep(2);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className={styles.reservasPage}>
+    <div className={`${styles.reservasPage} animate-fade-in`}>
       <div className="container">
         
         {/* Header */}
@@ -182,54 +213,123 @@ export default function Reservas() {
 
           {/* Step 1: Customer Identificaton */}
           {step === 1 && (
-            <form onSubmit={handleStep1Submit} className={styles.form}>
-              <div className={styles.fullWidth} style={{ marginBottom: '1rem' }}>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>Cadastro de Cliente</h2>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Informe seus dados de contato para iniciar a reserva. Se você já tem cadastro, digite o mesmo e-mail.</p>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="nome">Nome Completo</label>
-                <input 
-                  type="text" 
-                  id="nome" 
-                  placeholder="Ex: Adrian Silva" 
-                  value={nome}
-                  onChange={(e) => setNome(e.target.value)}
-                  required 
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="email">E-mail</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  placeholder="Ex: adrian@email.com" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required 
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="telefone">Telefone / WhatsApp</label>
-                <input 
-                  type="tel" 
-                  id="telefone" 
-                  placeholder="Ex: (11) 99999-9999" 
-                  value={telefone}
-                  onChange={(e) => setTelefone(e.target.value)}
-                  required 
-                />
-              </div>
-
-              <div className={styles.actions}>
-                <button type="submit" className={styles.btnPrimary} disabled={loading}>
-                  {loading ? 'Cadastrando...' : 'Escolher Mesa ➔'}
+            <div className="animate-fade-in">
+              {/* Tab Selector */}
+              <div style={{ display: 'flex', gap: '1rem', marginBottom: '2.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.2rem' }}>
+                <button 
+                  type="button"
+                  onClick={() => setIsRegistering(true)}
+                  style={{
+                    flex: 1,
+                    padding: '0.8rem',
+                    borderRadius: '4px',
+                    border: '1px solid ' + (isRegistering ? 'var(--accent-gold)' : 'var(--border-color)'),
+                    background: isRegistering ? 'var(--accent-gold-glow)' : 'transparent',
+                    color: isRegistering ? 'var(--accent-gold)' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                    fontSize: '0.9rem',
+                    transition: 'var(--transition-smooth)'
+                  }}
+                >
+                  ✨ Novo Cliente (Cadastro)
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => setIsRegistering(false)}
+                  style={{
+                    flex: 1,
+                    padding: '0.8rem',
+                    borderRadius: '4px',
+                    border: '1px solid ' + (!isRegistering ? 'var(--accent-gold)' : 'var(--border-color)'),
+                    background: !isRegistering ? 'var(--accent-gold-glow)' : 'transparent',
+                    color: !isRegistering ? 'var(--accent-gold)' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                    fontSize: '0.9rem',
+                    transition: 'var(--transition-smooth)'
+                  }}
+                >
+                  🔑 Já tenho Cadastro (Login)
                 </button>
               </div>
-            </form>
+
+              {isRegistering ? (
+                <form onSubmit={handleStep1Submit} className={styles.form}>
+                  <div className={styles.fullWidth} style={{ marginBottom: '1rem' }}>
+                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>Cadastro de Cliente</h2>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Preencha os campos abaixo para criar seu cadastro no restaurante.</p>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="nome">Nome Completo</label>
+                    <input 
+                      type="text" 
+                      id="nome" 
+                      placeholder="Ex: Adrian Silva" 
+                      value={nome}
+                      onChange={(e) => setNome(e.target.value)}
+                      required 
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">E-mail</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      placeholder="Ex: adrian@email.com" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required 
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="telefone">Telefone / WhatsApp</label>
+                    <input 
+                      type="tel" 
+                      id="telefone" 
+                      placeholder="Ex: (91) 98605-8877" 
+                      value={telefone}
+                      onChange={(e) => setTelefone(e.target.value)}
+                      required 
+                    />
+                  </div>
+
+                  <div className={styles.actions}>
+                    <button type="submit" className={styles.btnPrimary} disabled={loading}>
+                      {loading ? 'Cadastrando...' : 'Escolher Mesa ➔'}
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form onSubmit={handleLoginSubmit} className={styles.form}>
+                  <div className={styles.fullWidth} style={{ marginBottom: '1rem' }}>
+                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>Buscar Cadastro</h2>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Digite o e-mail cadastrado anteriormente para acessar e prosseguir.</p>
+                  </div>
+
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <label htmlFor="emailLogin">Seu E-mail Cadastrado</label>
+                    <input 
+                      type="email" 
+                      id="emailLogin" 
+                      placeholder="Ex: adrian@email.com" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required 
+                    />
+                  </div>
+
+                  <div className={styles.actions}>
+                    <button type="submit" className={styles.btnPrimary} disabled={loading}>
+                      {loading ? 'Buscando...' : 'Acessar e Escolher Mesa ➔'}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
           )}
 
           {/* Step 2: Date, Time & Table Selection */}

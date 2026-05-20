@@ -57,11 +57,11 @@ export default function Footer() {
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
                 <span className={styles.contactIcon}>📍</span>
-                <span>Av. Paulista, 1000<br />Bela Vista, São Paulo - SP</span>
+                <span>Av. Alcindo Cacela, 287 - Umarizal<br />Belém - PA, 66060-902</span>
               </div>
               <div className={styles.contactItem}>
                 <span className={styles.contactIcon}>📞</span>
-                <span>(11) 3254-9000</span>
+                <span>(91) 98605-8877</span>
               </div>
               <div className={styles.contactItem}>
                 <span className={styles.contactIcon}>✉️</span>

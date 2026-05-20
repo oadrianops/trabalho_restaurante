@@ -106,7 +106,7 @@ export default function Delivery() {
   // If order is successfully submitted, show success card
   if (orderSubmitted && createdOrder) {
     return (
-      <div className={styles.deliveryPage}>
+      <div className={`${styles.deliveryPage} animate-fade-in`}>
         <div className="container">
           <div className={styles.successCard}>
             <div className={styles.successIcon}>✓</div>
@@ -150,7 +150,7 @@ export default function Delivery() {
   }
 
   return (
-    <div className={styles.deliveryPage}>
+    <div className={`${styles.deliveryPage} animate-fade-in`}>
       <div className="container">
         
         {/* Header */}
@@ -250,7 +250,7 @@ export default function Delivery() {
                 <input 
                   type="tel" 
                   id="telefone" 
-                  placeholder="Ex: (11) 99999-9999" 
+                  placeholder="Ex: (91) 98605-8877" 
                   value={telefone}
                   onChange={(e) => setTelefone(e.target.value)}
                   required
@@ -263,7 +263,7 @@ export default function Delivery() {
                 <input 
                   type="text" 
                   id="endereco" 
-                  placeholder="Ex: Av. Paulista, 1000, Apto 51 - São Paulo/SP" 
+                  placeholder="Ex: Av. Alcindo Cacela, 287 - Umarizal, Belém - PA, 66060-902" 
                   value={endereco}
                   onChange={(e) => setEndereco(e.target.value)}
                   required

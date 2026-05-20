@@ -28,7 +28,7 @@ const MENU_ITEMS = [
     preco: 58.00,
     categoria: 'entradas',
     descricao: 'Burrata cremosa servida sobre cama de rúcula fresca, pesto de manjericão artesanal, tomates cereja assados e redução balsâmica. Acompanha focaccia da casa.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_burrata.png',
     tags: ['vegetariano'],
     harmonizacao: {
       bebida: 'Sauvignon Blanc',
@@ -44,7 +44,7 @@ const MENU_ITEMS = [
     preco: 52.00,
     categoria: 'entradas',
     descricao: 'Fatias de pão italiano tostadas no azeite de ervas, cobertas com presunto de Parma premium, figos grelhados, queijo de cabra cremoso e mel trufado.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_burrata.png',
     tags: [],
     harmonizacao: {
       bebida: 'Espumante Brut Chardonnay',
@@ -77,7 +77,7 @@ const MENU_ITEMS = [
     preco: 98.00,
     categoria: 'principais',
     descricao: 'Risoto de arroz arbóreo cozido lentamente com caldo artesanal de cogumelos, blend de cogumelos frescos (shimeji, paris e porcini), finalizado com queijo pecorino e azeite trufado.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_risoto.png',
     tags: ['vegetariano', 'sem glúten'],
     harmonizacao: {
       bebida: 'Vinho Merlot Envelhecido',
@@ -93,7 +93,7 @@ const MENU_ITEMS = [
     preco: 110.00,
     categoria: 'principais',
     descricao: 'Posta de salmão grelhada com crosta de gergelim, molho suave de maracujá fresco, acompanhada de legumes da estação grelhados no azeite de oliva extra virgem.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_tenderloin.png',
     tags: ['sem glúten'],
     harmonizacao: {
       bebida: 'Chardonnay Amadeirado',
@@ -109,7 +109,7 @@ const MENU_ITEMS = [
     preco: 88.00,
     categoria: 'principais',
     descricao: 'Nhoque artesanal de mandioquinha salteado na manteiga de sálvia, servido com ragu de carne seca desfiada cozida lentamente e finalizado com queijo coalho gratinado.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_risoto.png',
     tags: [],
     harmonizacao: {
       bebida: 'Cerveja IPA Artesanal',
@@ -142,7 +142,7 @@ const MENU_ITEMS = [
     preco: 38.00,
     categoria: 'sobremesas',
     descricao: 'Clássico creme de gemas e creme de leite fresco aromatizado com fava de baunilha Bourbon, coberto com uma casquinha crocante de açúcar caramelizado no maçarico.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_dessert.png',
     tags: ['vegetariano', 'sem glúten'],
     harmonizacao: {
       bebida: 'Colheita Tardia (Late Harvest)',
@@ -158,7 +158,7 @@ const MENU_ITEMS = [
     preco: 30.00,
     categoria: 'sobremesas',
     descricao: 'Pudim ultra cremoso de Leite Ninho com textura aveludada sem furinhos, regado com uma generosa calda de caramelo dourada perfeita.',
-    imagem: '/images/hero.png',
+    imagem: '/images/dish_dessert.png',
     tags: ['vegetariano', 'sem glúten'],
     harmonizacao: {
       bebida: 'Espresso Gourmet',
@@ -322,7 +322,8 @@ export default function Cardapio() {
   });
 
   return (
-    <div className={styles.menuPage}>
+    <div className={`${styles.menuPage} animate-fade-in`}>
+
       <div className="container">
         
         {/* Header */}
