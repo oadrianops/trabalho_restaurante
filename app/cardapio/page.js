@@ -324,7 +324,7 @@ export default function Cardapio() {
   return (
     <div className={`${styles.menuPage} animate-fade-in`}>
 
-      <div className="container">
+      <div className="container animate-fade-in-up">
         
         {/* Header */}
         <div className={styles.header}>
