@@ -14,7 +14,7 @@ export default function Delivery() {
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [createdOrder, setCreatedOrder] = useState(null);
 
-  // Load cart from localStorage
+  // busca o carrinho salvo no localstorage da maquina
   useEffect(() => {
     const loadCart = () => {
       const stored = localStorage.getItem('cart');
@@ -24,7 +24,7 @@ export default function Delivery() {
     };
     loadCart();
 
-    // Listen to storage events to keep cart synced
+    // escuta outras abas pra sincronizar na hora se adicionar pratos
     window.addEventListener('storage', loadCart);
     return () => window.removeEventListener('storage', loadCart);
   }, []);
@@ -50,7 +50,7 @@ export default function Delivery() {
     window.dispatchEvent(new Event('storage'));
   };
 
-  // Calculate prices
+  // faz as contas de subtotal, frete e total
   const subtotal = cart.reduce((acc, item) => acc + (item.preco * item.quantity), 0);
   const taxaEntrega = subtotal > 150 || subtotal === 0 ? 0.00 : 12.00;
   const total = subtotal + taxaEntrega;
@@ -77,12 +77,12 @@ export default function Delivery() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        // Clear cart
+        // limpa o carrinho local ja que o pedido foi enviado
         localStorage.removeItem('cart');
         setCart([]);
         window.dispatchEvent(new Event('storage'));
         
-        // Show success screen
+        // muda o estado pra exibir a tela de pedido concluido
         setCreatedOrder({
           id: data.orderId,
           nome,
@@ -103,7 +103,7 @@ export default function Delivery() {
     }
   };
 
-  // If order is successfully submitted, show success card
+  // se o pedido foi concluido, mostra o card de sucesso
   if (orderSubmitted && createdOrder) {
     return (
       <div className={`${styles.deliveryPage} animate-fade-in`}>

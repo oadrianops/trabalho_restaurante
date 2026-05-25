@@ -227,7 +227,7 @@ export default function Cardapio() {
   const [selectedDish, setSelectedDish] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
 
-  // Auto-hide toast
+  // limpa o aviso do toast depois de 3 segundos
   useEffect(() => {
     if (toastMessage) {
       const timer = setTimeout(() => {
@@ -237,7 +237,7 @@ export default function Cardapio() {
     }
   }, [toastMessage]);
 
-  // Lock/unlock body scroll when pairing modal is open
+  // trava o scroll da tela de fundo pra nao bugar quando abrir o modal de harmonizacao
   useEffect(() => {
     if (selectedDish) {
       document.body.style.overflow = 'hidden';
@@ -282,7 +282,7 @@ export default function Cardapio() {
     
     localStorage.setItem('cart', JSON.stringify(cart));
     
-    // Dispatch standard storage event to update other pages/components instantly
+    // dispara evento global pra atualizar o header das outras abas
     window.dispatchEvent(new Event('storage'));
     
     setToastMessage(`Adicionado: ${notifyName || item.nome} no carrinho!`);
@@ -294,14 +294,14 @@ export default function Cardapio() {
     // Add dish
     addToCart(selectedDish);
     
-    // Add beverage
+    // adiciona a bebida sugerida no carrinho tambem
     const bevItem = {
-      id: selectedDish.id + 100, // Safe offset for fake item ids
+      id: selectedDish.id + 100, // offset pra nao trombar com id do prato
       nome: `${selectedDish.harmonizacao.bebida} (${selectedDish.harmonizacao.tipo})`,
       preco: selectedDish.harmonizacao.preco
     };
     
-    // Wait slightly to let the first add finish or do it together
+    // junta o prato e a bebida no localstorage de uma vez so
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     // Add dish
     const extDish = cart.find(i => i.id === selectedDish.id);

@@ -14,16 +14,16 @@ export async function POST(request) {
     }
 
     try {
-      // Verificar se o cliente já existe por e-mail
+      // ve se o cliente ja existe no banco pelo email
       const checkSql = 'SELECT id FROM clientes WHERE email = ?';
       const existing = await query(checkSql, [email]);
 
       if (existing && existing.length > 0) {
-        // Se existir, atualiza o telefone e nome caso tenham mudado (ou apenas retorna)
+        // se ja existir, da um update nos dados (nome e telefone)
         const updateSql = 'UPDATE clientes SET nome = ?, telefone = ? WHERE id = ?';
         await query(updateSql, [nome, telefone, existing[0].id]);
         
-        console.log(`Cliente existente encontrado e atualizado. ID: ${existing[0].id}`);
+        console.log(`Cliente antigo atualizado: ${existing[0].id}`);
         return NextResponse.json({
           success: true,
           clienteId: existing[0].id,
@@ -31,7 +31,7 @@ export async function POST(request) {
         });
       }
 
-      // Se não existir, criar novo
+      // se nao existir cadastrado, cria um novo
       const insertSql = 'INSERT INTO clientes (nome, email, telefone) VALUES (?, ?, ?)';
       const result = await query(insertSql, [nome, email, telefone]);
       
@@ -44,9 +44,9 @@ export async function POST(request) {
         message: 'Cliente cadastrado com sucesso'
       });
     } catch (dbError) {
-      console.warn('Erro no banco de dados para clientes, utilizando fallback de simulação:', dbError.message);
+      console.warn('Erro de conexao no banco, rodando fallback local:', dbError.message);
       
-      // Fallback simulado
+      // se o banco tiver fora, gera um id qualquer pra nao travar o front
       const fakeClienteId = Math.floor(Math.random() * 500) + 1;
       return NextResponse.json({
         success: true,
@@ -92,9 +92,9 @@ export async function GET(request) {
         );
       }
     } catch (dbError) {
-      console.warn('Erro ao buscar cliente no banco de dados, utilizando fallback de simulação:', dbError.message);
+      console.warn('Banco offline, simulando login pra teste:', dbError.message);
       
-      // Fallback simulado se o banco estiver fora do ar
+      // deixa passar esses emails pra conseguir testar o login sem banco
       if (email.includes('teste') || email.includes('adrian') || email.includes('@')) {
         return NextResponse.json({
           success: true,

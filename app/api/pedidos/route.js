@@ -6,7 +6,7 @@ export async function POST(request) {
     const body = await request.json();
     const { cliente_nome, cliente_telefone, endereco, total, itens } = body;
 
-    // Validação simples
+    // valida se veio tudo certo
     if (!cliente_nome || !cliente_telefone || !endereco || !total || !itens) {
       return NextResponse.json(
         { error: 'Todos os campos são obrigatórios' },
@@ -17,7 +17,7 @@ export async function POST(request) {
     const itensString = typeof itens === 'string' ? itens : JSON.stringify(itens);
 
     try {
-      // Inserir pedido no banco de dados MariaDB
+      // insere o pedido novo no banco de dados
       const sql = `
         INSERT INTO pedidos (cliente_nome, cliente_telefone, endereco, total, itens, status)
         VALUES (?, ?, ?, ?, ?, 'pendente')
@@ -26,7 +26,7 @@ export async function POST(request) {
       
       const insertId = result.insertId || Math.floor(Math.random() * 1000) + 1;
       
-      console.log(`Pedido #${insertId} inserido com sucesso no banco de dados MariaDB.`);
+      console.log(`Pedido #${insertId} salvo no banco MariaDB.`);
       
       return NextResponse.json({
         success: true,
@@ -34,9 +34,9 @@ export async function POST(request) {
         message: 'Pedido realizado com sucesso'
       });
     } catch (dbError) {
-      console.warn('Erro ao conectar ao banco de dados, utilizando fallback de simulação:', dbError.message);
+      console.warn('Banco de dados de pedidos falhou, usando simulador local:', dbError.message);
       
-      // Fallback simulado caso o banco esteja indisponível durante testes locais
+      // se der treta no banco, simula o numero do pedido pra nao quebrar o fluxo
       const fakeOrderId = Math.floor(Math.random() * 9000) + 1000;
       return NextResponse.json({
         success: true,

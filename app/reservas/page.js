@@ -46,7 +46,7 @@ export default function Reservas() {
     setDataReserva(`${yyyy}-${mm}-${dd}`);
   }, []);
 
-  // Fetch occupied tables when date changes
+  // busca no banco quais mesas ja estao reservadas nessa data
   const fetchOccupiedTables = useCallback(async (date) => {
     if (!date) return;
     try {
@@ -88,7 +88,7 @@ export default function Reservas() {
     } catch (err) {
       console.error('Erro de rede no cadastro de cliente:', err);
       alert('Erro de conexão ao realizar cadastro. Usando modo offline local.');
-      // Offline fallback local
+      // se cair a internet, cria um id fake pra pessoa conseguir prosseguir no teste
       setClienteId(Math.floor(Math.random() * 500) + 1);
       setStep(2);
     } finally {
@@ -128,7 +128,7 @@ export default function Reservas() {
     } catch (err) {
       console.error('Erro ao salvar reserva:', err);
       alert('Erro de conexão ao salvar reserva.');
-      // Local fallback
+      // se o banco falhar, simula a confirmacao local
       setReservaId(Math.floor(Math.random() * 9000) + 1000);
       setStep(3);
     } finally {
@@ -137,7 +137,7 @@ export default function Reservas() {
   };
 
   const handleTableClick = (table) => {
-    if (occupiedTables.includes(table.id)) return; // Can't click occupied
+    if (occupiedTables.includes(table.id)) return; // bloqueado se tiver ocupado
     setMesaSelecionada(table.id);
   };
 

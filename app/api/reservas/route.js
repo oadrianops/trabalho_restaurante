@@ -14,7 +14,7 @@ export async function GET(request) {
     }
 
     try {
-      // Buscar mesas ocupadas na data selecionada
+      // busca quais mesas ja estao ocupadas nesse dia
       const sql = 'SELECT numero_mesa FROM reservas WHERE data_reserva = ? AND status != ?';
       const results = await query(sql, [data, 'cancelada']);
       
@@ -25,10 +25,9 @@ export async function GET(request) {
         occupiedTables
       });
     } catch (dbError) {
-      console.warn('Erro ao carregar reservas do banco de dados, utilizando fallback de simulação:', dbError.message);
+      console.warn('Banco offline, simulando mesas ocupadas:', dbError.message);
       
-      // Fallback simulado: na simulação, algumas mesas aleatórias estarão ocupadas
-      // (ex: mesas 2 e 5 ocupadas para fazer o mapa dinâmico)
+      // se o banco falhar, deixa essas duas ocupadas pra dar pra testar o visual
       const fakeOccupied = [2, 5];
       
       return NextResponse.json({
@@ -59,7 +58,7 @@ export async function POST(request) {
     }
 
     try {
-      // Inserir reserva no banco
+      // insere a reserva no banco
       const sql = `
         INSERT INTO reservas (cliente_id, data_reserva, hora_reserva, numero_pessoas, numero_mesa, status, observacoes)
         VALUES (?, ?, ?, ?, ?, 'confirmada', ?)
@@ -74,7 +73,7 @@ export async function POST(request) {
       ]);
 
       const insertId = result.insertId || Math.floor(Math.random() * 1000) + 1;
-      console.log(`Reserva #${insertId} cadastrada com sucesso para o Cliente ID: ${cliente_id}`);
+      console.log(`Reserva #${insertId} salva pra o cliente: ${cliente_id}`);
 
       return NextResponse.json({
         success: true,
@@ -82,9 +81,9 @@ export async function POST(request) {
         message: 'Reserva confirmada com sucesso!'
       });
     } catch (dbError) {
-      console.warn('Erro ao inserir reserva no banco, utilizando fallback de simulação:', dbError.message);
+      console.warn('Banco offline pra reservas, rodando simulado local:', dbError.message);
       
-      // Fallback simulado
+      // se der ruim no banco, simula id pra nao dar erro na tela
       const fakeReservaId = Math.floor(Math.random() * 9000) + 1000;
       return NextResponse.json({
         success: true,
